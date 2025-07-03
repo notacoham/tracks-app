@@ -1,12 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import AuthForm from "../components/AuthForm";
 import NavLink from "../components/NavLink";
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useEffect, useLayoutEffect } from "react";
 import { Context as AuthContext } from "../context/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 
 const SigninScreen = () => {
-  const { state, signin } = useContext(AuthContext);
+  const { state, signin, clearErrorMessage } = useContext(AuthContext);
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -14,6 +14,16 @@ const SigninScreen = () => {
       header: null,
     });
   });
+
+  useEffect(() => {
+    clearErrorMessage();
+
+    const unsubscribe = navigation.addListener("focus", () => {
+      clearErrorMessage();
+    });
+
+    return unsubscribe;
+  }, []);
 
   return (
     <View style={styles.container}>
