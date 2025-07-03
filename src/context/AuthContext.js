@@ -6,6 +6,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // reducer function to cover action types
 const authReducer = (state, action) => {
   switch (action.type) {
+    case "signout":
+      return { token: null, errorMessage: "" };
     case "clear_error_message":
       return { ...state, errorMessage: "" };
     case "signin":
@@ -70,8 +72,10 @@ const tryLocalSignin = (dispatch) => {
 };
 
 const signout = (dispatch) => {
-  return () => {
-    // sign out update state
+  return async () => {
+    // sign out update state and clear storage
+    await AsyncStorage.removeItem("token");
+    dispatch({ type: "signout" });
   };
 };
 
