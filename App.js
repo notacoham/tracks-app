@@ -51,7 +51,11 @@ function AppTabNavigator() {
 
 // Root Navigator for the whole app
 function RootNavigatorContent() {
-  const { state } = React.useContext(AuthContext);
+  const { state, tryLocalSignin } = React.useContext(AuthContext);
+
+  React.useEffect(() => {
+    tryLocalSignin();
+  }, []);
 
   return (
     // Wrap App with auth context provider
