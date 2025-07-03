@@ -24,8 +24,8 @@ const SignupScreen = () => {
         onSubmit={({ email, password }) => signup({ email, password })}
       />
       <NavLink
-        linkText="Already have an account? Sign in instead."
-        routeName="Signin"
+        linkText="Already have an account? Sign in instead!"
+        navFunction={() => navigation.navigate("Signin")}
       />
     </View>
   );
