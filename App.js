@@ -8,7 +8,10 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Provider as AuthProvider } from "./src/context/AuthContext";
+import {
+  Provider as AuthProvider,
+  Context as AuthContext,
+} from "./src/context/AuthContext";
 
 // Create Stacks and Tabs
 const AuthStack = createNativeStackNavigator();
@@ -47,15 +50,21 @@ function AppTabNavigator() {
 }
 
 // Root Navigator for the whole app
-function RootNavigator() {
+function RootNavigatorContent() {
+  const { state } = React.useContext(AuthContext);
+
   return (
     // Wrap App with auth context provider
-    <AuthProvider>
-      <NavigationContainer>
-        <AuthNavigator />
-      </NavigationContainer>
-    </AuthProvider>
+    <NavigationContainer>
+      {state.token ? <AppTabNavigator /> : <AuthNavigator />}
+    </NavigationContainer>
   );
 }
 
-export default RootNavigator;
+export default function App() {
+  return (
+    <AuthProvider>
+      <RootNavigatorContent />
+    </AuthProvider>
+  );
+}
