@@ -1,5 +1,4 @@
 import * as React from "react";
-import { View, Text } from "react-native";
 import AccountScreen from "./src/screens/AccountScreen";
 import SigninScreen from "./src/screens/SigninScreen";
 import SignupScreen from "./src/screens/SignupScreen";
@@ -50,6 +49,7 @@ function AppTabNavigator() {
 // Root Navigator for the whole app
 function RootNavigator() {
   return (
+    // Wrap App with auth context provider
     <AuthProvider>
       <NavigationContainer>
         <AuthNavigator />
