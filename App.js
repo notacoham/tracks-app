@@ -49,22 +49,23 @@ function AppTabNavigator() {
   );
 }
 
-// Root Navigator for the whole app
+// Root Navigator with ternary to check sign in token
 function RootNavigatorContent() {
   const { state, tryLocalSignin } = React.useContext(AuthContext);
 
+  // auto sign in before paint
   React.useEffect(() => {
     tryLocalSignin();
   }, []);
 
   return (
-    // Wrap App with auth context provider
     <NavigationContainer>
       {state.token ? <AppTabNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 }
 
+// Whole app wrapped in AuthProvider for context
 export default function App() {
   return (
     <AuthProvider>

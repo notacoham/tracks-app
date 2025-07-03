@@ -9,12 +9,14 @@ const SigninScreen = () => {
   const { state, signin, clearErrorMessage } = useContext(AuthContext);
   const navigation = useNavigation();
 
+  // set header for screen to be none
   useLayoutEffect(() => {
     navigation.setOptions({
       header: null,
     });
   });
 
+  // clear error listener for each navigation
   useEffect(() => {
     clearErrorMessage();
 

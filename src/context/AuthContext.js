@@ -19,12 +19,6 @@ const authReducer = (state, action) => {
   }
 };
 
-const clearErrorMessage = (dispatch) => {
-  return () => {
-    dispatch({ type: "clear_error_message" });
-  };
-};
-
 // bound action functions
 const signup = (dispatch) => {
   return async ({ email, password }) => {
@@ -62,20 +56,27 @@ const signin = (dispatch) => {
   };
 };
 
+const signout = (dispatch) => {
+  return async () => {
+    // sign out update state and clear storage
+    await AsyncStorage.removeItem("token");
+    dispatch({ type: "signout" });
+  };
+};
+
+const clearErrorMessage = (dispatch) => {
+  return () => {
+    dispatch({ type: "clear_error_message" });
+  };
+};
+
+// auto sign in function using Async storage
 const tryLocalSignin = (dispatch) => {
   return async () => {
     const token = await AsyncStorage.getItem("token");
     if (token) {
       dispatch({ type: "signin", payload: token });
     }
-  };
-};
-
-const signout = (dispatch) => {
-  return async () => {
-    // sign out update state and clear storage
-    await AsyncStorage.removeItem("token");
-    dispatch({ type: "signout" });
   };
 };
 
