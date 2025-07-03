@@ -25,7 +25,7 @@ const SignupScreen = () => {
       />
       <NavLink
         linkText="Already have an account? Sign in instead."
-        navFunction={() => navigation.navigate("Signin")}
+        routeName="Signin"
       />
     </View>
   );
