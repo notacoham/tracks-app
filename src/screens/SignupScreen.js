@@ -2,9 +2,11 @@ import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
 import { Text, Input, Button } from "@rneui/themed";
 import Spacer from "./components/Spacer";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 
 const SignupScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -19,9 +21,22 @@ const SignupScreen = () => {
         <Text h3>Sign Up for Tracker</Text>
       </Spacer>
       <Spacer />
-      <Input label="Email" />
+      <Input
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
       <Spacer />
-      <Input label="Password" />
+      <Input
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        autoCapitalize="none"
+        autoCorrect={false}
+        secureTextEntry
+      />
       <Spacer>
         <Button title="Sign Up" />
       </Spacer>
