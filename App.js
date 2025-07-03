@@ -1,20 +1,58 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { View, Text } from "react-native";
+import AccountScreen from "./src/screens/AccountScreen";
+import SigninScreen from "./src/screens/SigninScreen";
+import SignupScreen from "./src/screens/SignupScreen";
+import TrackCreateScreen from "./src/screens/TrackCreateScreen";
+import TrackDetailScreen from "./src/screens/TrackDetailScreen";
+import TrackListScreen from "./src/screens/TrackListScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-export default function App() {
+// Create Stacks and Tabs
+const AuthStack = createNativeStackNavigator();
+const TrackStack = createNativeStackNavigator();
+const AppTabs = createBottomTabNavigator();
+
+// Navigator for Auth Flow
+function AuthNavigator() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthStack.Navigator screenOptions={{ headerShown: true }}>
+      <AuthStack.Screen name="Signup" component={SignupScreen} />
+      <AuthStack.Screen name="Signin" component={SigninScreen} />
+    </AuthStack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// Navigator for Tracks Flow to be nested in the tabs section
+function TrackNavigator() {
+  return (
+    <TrackStack.Navigator screenOptions={{ headerShown: false }}>
+      <TrackStack.Screen name="TrackList" component={TrackListScreen} />
+      <TrackStack.Screen name="TrackDetail" component={TrackDetailScreen} />
+    </TrackStack.Navigator>
+  );
+}
+
+// Tab Navigator of main App
+function AppTabNavigator() {
+  return (
+    <AppTabs.Navigator>
+      <AppTabs.Screen name="TrackListTab" component={TrackNavigator} />
+      <AppTabs.Screen name="TrackCreateTab" component={TrackCreateScreen} />
+      <AppTabs.Screen name="Account" component={AccountScreen} />
+    </AppTabs.Navigator>
+  );
+}
+
+// Root Navigator for the whole app
+function RootNavigator() {
+  return (
+    <NavigationContainer>
+      <AuthNavigator />
+    </NavigationContainer>
+  );
+}
+
+export default RootNavigator;
