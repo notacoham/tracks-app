@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 const TrackCreateScreen = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>TrackCreateScreen</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

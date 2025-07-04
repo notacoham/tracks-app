@@ -21,7 +21,7 @@ const AppTabs = createBottomTabNavigator();
 // Navigator for Auth Flow
 function AuthNavigator() {
   return (
-    <AuthStack.Navigator screenOptions={{ headerShown: true }}>
+    <AuthStack.Navigator screenOptions={{ headerShown: false }}>
       <AuthStack.Screen name="Signup" component={SignupScreen} />
       <AuthStack.Screen name="Signin" component={SigninScreen} />
     </AuthStack.Navigator>
@@ -31,7 +31,7 @@ function AuthNavigator() {
 // Navigator for Tracks Flow to be nested in the tabs section
 function TrackNavigator() {
   return (
-    <TrackStack.Navigator screenOptions={{ headerShown: false }}>
+    <TrackStack.Navigator screenOptions={{ headerShown: true }}>
       <TrackStack.Screen name="TrackList" component={TrackListScreen} />
       <TrackStack.Screen name="TrackDetail" component={TrackDetailScreen} />
     </TrackStack.Navigator>
@@ -41,7 +41,7 @@ function TrackNavigator() {
 // Tab Navigator of main App
 function AppTabNavigator() {
   return (
-    <AppTabs.Navigator>
+    <AppTabs.Navigator screenOptions={{ headerShown: false }}>
       <AppTabs.Screen name="TrackListTab" component={TrackNavigator} />
       <AppTabs.Screen name="TrackCreateTab" component={TrackCreateScreen} />
       <AppTabs.Screen name="Account" component={AccountScreen} />
