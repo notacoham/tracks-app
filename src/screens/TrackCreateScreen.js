@@ -1,7 +1,12 @@
+import "../_mockLocation";
 import { Text } from "@rneui/themed";
 import { SafeAreaView, StyleSheet } from "react-native";
 import Map from "../components/Map";
-import { requestForegroundPermissionsAsync } from "expo-location";
+import {
+  requestForegroundPermissionsAsync,
+  watchPositionAsync,
+  Accuracy,
+} from "expo-location";
 import { useEffect, useState } from "react";
 import Spacer from "../components/Spacer";
 
@@ -14,6 +19,16 @@ const TrackCreateScreen = () => {
       if (!granted) {
         throw new Error("Location permission not granted.");
       }
+      await watchPositionAsync(
+        {
+          accuracy: Accuracy.BestForNavigation,
+          timeInterval: 1000,
+          distanceInterval: 10,
+        },
+        (location) => {
+          console.log(location);
+        }
+      );
     } catch (error) {
       setErr(error);
     }
@@ -29,7 +44,6 @@ const TrackCreateScreen = () => {
       <Spacer>
         <Map />
       </Spacer>
-      {err ? <Text>Please enable location services</Text> : null}
     </SafeAreaView>
   );
 };

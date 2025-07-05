@@ -23,4 +23,5 @@ setInterval(() => {
     watchId: Location._getCurrentWatchId(),
     location: getLocation(counter),
   });
+  counter++;
 }, 1000);
