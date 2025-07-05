@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import AuthForm from "../components/AuthForm";
 import NavLink from "../components/NavLink";
-import { useContext, useEffect, useLayoutEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Context as AuthContext } from "../context/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 
