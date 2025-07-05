@@ -7,10 +7,12 @@ import {
   watchPositionAsync,
   Accuracy,
 } from "expo-location";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Spacer from "../components/Spacer";
+import { Context as LocationContext } from "../context/LocationContext";
 
 const TrackCreateScreen = () => {
+  const { addLocation } = useContext(LocationContext);
   const [err, setErr] = useState(null);
 
   const startWatching = async () => {
@@ -26,7 +28,7 @@ const TrackCreateScreen = () => {
           distanceInterval: 10,
         },
         (location) => {
-          console.log(location);
+          addLocation(location);
         }
       );
     } catch (error) {
