@@ -12,6 +12,7 @@ import {
   Provider as AuthProvider,
   Context as AuthContext,
 } from "./src/context/AuthContext";
+import { Provider as LocationProvider } from "./src/context/LocationContext";
 
 // Create Stacks and Tabs
 const AuthStack = createNativeStackNavigator();
@@ -68,8 +69,10 @@ function RootNavigatorContent() {
 // Whole app wrapped in AuthProvider for context
 export default function App() {
   return (
-    <AuthProvider>
-      <RootNavigatorContent />
-    </AuthProvider>
+    <LocationProvider>
+      <AuthProvider>
+        <RootNavigatorContent />
+      </AuthProvider>
+    </LocationProvider>
   );
 }
